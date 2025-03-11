@@ -9,12 +9,16 @@ export default function RegisterView() {
         formState: { errors },
     } = useForm();
 
+    const handleRegister = () => {
+        console.log("Desde handleRegister");
+    };
+
     return (
         <>
             <h1 className="text-4xl text-white font-bold">Crear Cuenta</h1>
 
             <form
-                onSubmit={() => {}}
+                onSubmit={handleSubmit(handleRegister)}
                 className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10"
             >
                 <div className="grid grid-cols-1 space-y-3">
@@ -26,6 +30,9 @@ export default function RegisterView() {
                         type="text"
                         placeholder="Tu Nombre"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+                        {...register("name", {
+                            required: "El nombre es obligatorio",
+                        })}
                     />
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
@@ -37,6 +44,9 @@ export default function RegisterView() {
                         type="email"
                         placeholder="Email de Registro"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+                        {...register("email", {
+                            required: "El email es obligatorio",
+                        })}
                     />
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
@@ -48,6 +58,9 @@ export default function RegisterView() {
                         type="text"
                         placeholder="Nombre de usuario: sin espacios"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+                        {...register("handle", {
+                            required: "El handle es obligatorio",
+                        })}
                     />
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
@@ -62,6 +75,9 @@ export default function RegisterView() {
                         type="password"
                         placeholder="Password de Registro"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+                        {...register("password", {
+                            required: "El password es obligatorio",
+                        })}
                     />
                 </div>
 
@@ -77,6 +93,9 @@ export default function RegisterView() {
                         type="password"
                         placeholder="Repetir Password"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+                        {...register("password_confirmation", {
+                            required: "El password es obligatorio",
+                        })}
                     />
                 </div>
 
