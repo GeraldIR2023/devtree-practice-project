@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default function RegisterView() {
     const {
@@ -34,6 +35,9 @@ export default function RegisterView() {
                             required: "El nombre es obligatorio",
                         })}
                     />
+                    {errors.name && (
+                        <ErrorMessage>{errors.name.message}</ErrorMessage>
+                    )}
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
                     <label htmlFor="email" className="text-2xl text-slate-500">
@@ -48,6 +52,9 @@ export default function RegisterView() {
                             required: "El email es obligatorio",
                         })}
                     />
+                    {errors.email && (
+                        <ErrorMessage>{errors.email.message}</ErrorMessage>
+                    )}
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
                     <label htmlFor="handle" className="text-2xl text-slate-500">
@@ -62,6 +69,9 @@ export default function RegisterView() {
                             required: "El handle es obligatorio",
                         })}
                     />
+                    {errors.handle && (
+                        <ErrorMessage>{errors.handle.message}</ErrorMessage>
+                    )}
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
                     <label
@@ -79,6 +89,9 @@ export default function RegisterView() {
                             required: "El password es obligatorio",
                         })}
                     />
+                    {errors.password && (
+                        <ErrorMessage>{errors.password.message}</ErrorMessage>
+                    )}
                 </div>
 
                 <div className="grid grid-cols-1 space-y-3">
@@ -97,6 +110,11 @@ export default function RegisterView() {
                             required: "El password es obligatorio",
                         })}
                     />
+                    {errors.password_confirmation && (
+                        <ErrorMessage>
+                            {errors.password_confirmation.message}
+                        </ErrorMessage>
+                    )}
                 </div>
 
                 <input
