@@ -18,6 +18,8 @@ export default function RegisterView() {
         formState: { errors },
     } = useForm({ defaultValues: initialValues }); //^ Le pasamos los valores iniciales del formulario
 
+    const password = watch("password"); //^ Observamos el campo password para comparar con password_confirmation
+
     const handleRegister = () => {
         console.log("Desde handleRegister");
     };
@@ -58,6 +60,10 @@ export default function RegisterView() {
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register("email", {
                             required: "El email es obligatorio",
+                            pattern: {
+                                value: /\S+@\S+\.\S+/,
+                                message: "E-mail no válido",
+                            },
                         })}
                     />
                     {errors.email && (
@@ -95,6 +101,11 @@ export default function RegisterView() {
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register("password", {
                             required: "El password es obligatorio",
+                            minLength: {
+                                value: 8,
+                                message:
+                                    "El password debe ser de mínimo 8 caracteres",
+                            },
                         })}
                     />
                     {errors.password && (
@@ -116,6 +127,9 @@ export default function RegisterView() {
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register("password_confirmation", {
                             required: "El password es obligatorio",
+                            validate: (value) =>
+                                value === password ||
+                                "Los passwords no coinciden",
                         })}
                     />
                     {errors.password_confirmation && (
