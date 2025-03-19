@@ -13,7 +13,7 @@ export default function AuthLayout() {
                     </div>
                 </div>
             </div>
-            <Toaster position="top-right" /> //^ Agregamos el componente Toaster
+            <Toaster position="top-right" />
         </>
     );
 }
