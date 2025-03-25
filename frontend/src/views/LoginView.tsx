@@ -22,7 +22,7 @@ export default function LoginView() {
     const handleLogin = async (formData: LoginForm) => {
         try {
             const { data } = await api.post(`/auth/login`, formData);
-            toast.success(data); //^ Mostramos el mensaje de éxito
+            localStorage.setItem("AUTH_TOKEN", data); //*Guardamos el token en el local storage
         } catch (error) {
             if (isAxiosError(error) && error.response) {
                 toast.error(error.response.data.error);
