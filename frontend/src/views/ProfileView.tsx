@@ -1,8 +1,9 @@
+import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../components/ErrorMessage";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { ProfileForm, User } from "../types";
 import { updateProfile } from "../api/DevTreeAPI";
+import { ProfileForm, User } from "../types";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 export default function ProfileView() {
     const queryClient = useQueryClient();
@@ -20,11 +21,11 @@ export default function ProfileView() {
 
     const updateProfileMutation = useMutation({
         mutationFn: updateProfile,
-        onError: () => {
-            console.log("Error al actualizar el perfil");
+        onError: (error) => {
+            toast.error(error.message);
         },
-        onSuccess: () => {
-            console.log("Perfil actualizado correctamente");
+        onSuccess: (data) => {
+            toast.success(data);
         },
     });
 
