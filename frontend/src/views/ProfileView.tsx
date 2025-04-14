@@ -26,6 +26,7 @@ export default function ProfileView() {
         },
         onSuccess: (data) => {
             toast.success(data);
+            queryClient.invalidateQueries({ queryKey: ["user"] }); //^ Invalidamos la cache para que se vuelva a cargar el usuario actualizado
         },
     });
 
