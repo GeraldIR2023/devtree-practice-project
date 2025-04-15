@@ -30,6 +30,12 @@ export default function ProfileView() {
         },
     });
 
+    const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            console.log(e.target.files[0]); //^ Obtenemos el archivo de la imagen
+        }
+    };
+
     const handleUserProfileForm = (formData: ProfileForm) => {
         updateProfileMutation.mutate(formData);
     };
@@ -78,7 +84,7 @@ export default function ProfileView() {
                     name="handle"
                     className="border-none bg-slate-100 rounded-lg p-2"
                     accept="image/*"
-                    onChange={() => {}}
+                    onChange={handlechange}
                 />
             </div>
 
