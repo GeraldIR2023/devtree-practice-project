@@ -8,7 +8,7 @@ export default function LinkTreeView() {
         <>
             <div className=" space-y-5">
                 {devTreeLinks.map((item) => (
-                    <DevTreeInput />
+                    <DevTreeInput key={item.name} item={item} />
                 ))}
             </div>
         </>
