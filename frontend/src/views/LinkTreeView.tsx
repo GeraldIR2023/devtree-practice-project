@@ -1,11 +1,24 @@
-import { useState } from "react";
-import { social } from "../data/social";
-import DevTreeInput from "../components/DevTreeInput";
-import { isValidUrl } from "../utils";
 import { toast } from "sonner";
+import { social } from "../data/social";
+import { useState } from "react";
+import { isValidUrl } from "../utils";
+import { useMutation } from "@tanstack/react-query";
+import { updateProfile } from "../api/DevTreeAPI";
+
+import DevTreeInput from "../components/DevTreeInput";
 
 export default function LinkTreeView() {
     const [devTreeLinks, setDevTreeLinks] = useState(social); //^ Lo colocamos en el state para mantenerlo sincronizado entre varias funciones
+
+    const { mutate } = useMutation({
+        mutationFn: updateProfile,
+        onError: (error) => {
+            toast.error(error.message);
+        },
+        onSuccess: () => {
+            toast.success("Perfil actualizado correctamente");
+        },
+    }); //^Extraemos mutate por que solo hay una mutación
 
     const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const updatedLinks = devTreeLinks.map((link) =>
@@ -42,6 +55,9 @@ export default function LinkTreeView() {
                         handleEnableLink={handleEnableLink}
                     />
                 ))}
+                <button className="bg-cyan-400 p-2 text-lg w-full uppercase text-slate-600 rounded font-bold">
+                    Guardar Cambios
+                </button>
             </div>
         </>
     );
