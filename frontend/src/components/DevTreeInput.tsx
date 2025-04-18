@@ -14,7 +14,6 @@ export default function DevTreeInput({
     handleUrlChange,
     handleEnableLink,
 }: DevTreeInputProps) {
-    console.log(item);
     return (
         <div className="bg-white shadow-sm p-5 flex items-center gap-3">
             <div
