@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { SocialNetwork, User } from "../types";
 import NavigationTabs from "./NavigationTabs";
+import DevTreeLink from "./DevTreeLink";
 
 type DevtreeProps = {
     data: User;
@@ -65,7 +66,7 @@ export default function Devtree({ data }: DevtreeProps) {
 
                             <div className="mt-20 flex flex-col gap-5">
                                 {enabledLinks.map((link) => (
-                                    <p>{link.url}</p>
+                                    <DevTreeLink key={link.name} link={link} />
                                 ))}
                             </div>
                         </div>
