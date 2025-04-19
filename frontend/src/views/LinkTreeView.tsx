@@ -47,14 +47,9 @@ export default function LinkTreeView() {
                 : link
         );
         setDevTreeLinks(updatedLinks);
-
-        queryClient.setQueryData(["user"], (prevData: User) => {
-            return {
-                ...prevData,
-                links: JSON.stringify(updatedLinks),
-            };
-        });
     };
+
+    const links: SocialNetwork[] = JSON.parse(user.links);
 
     const handleEnableLink = (socialNetwork: string) => {
         const updatedLinks = devTreeLinks.map((link) => {
@@ -69,10 +64,27 @@ export default function LinkTreeView() {
         });
         setDevTreeLinks(updatedLinks);
 
+        let updatedItems: SocialNetwork[] = [];
+        const selectedSocialNetwork = updatedLinks.find(
+            (link) => link.name === socialNetwork
+        );
+        if (selectedSocialNetwork?.enabled) {
+            const newItem = {
+                ...selectedSocialNetwork,
+                id: links.length + 1,
+            };
+            updatedItems = [...links, newItem];
+        } else {
+            console.log("Deshabilitando...");
+        }
+
+        console.log(updatedItems);
+
+        //*Almacenar en la base de datos
         queryClient.setQueryData(["user"], (prevData: User) => {
             return {
                 ...prevData,
-                links: JSON.stringify(updatedLinks), //^ Guardamos los links en el usuario
+                links: JSON.stringify(updatedItems), //^ Guardamos los links en el usuario
             };
         });
     };
