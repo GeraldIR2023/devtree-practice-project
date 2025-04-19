@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import { SocialNetwork, User } from "../types";
 import NavigationTabs from "./NavigationTabs";
 import DevTreeLink from "./DevTreeLink";
-import { set } from "react-hook-form";
+//import { set } from "react-hook-form";
 
 type DevtreeProps = {
     data: User;

@@ -69,11 +69,26 @@ export default function LinkTreeView() {
             (link) => link.name === socialNetwork
         );
         if (selectedSocialNetwork?.enabled) {
-            const newItem = {
-                ...selectedSocialNetwork,
-                id: links.length + 1,
-            };
-            updatedItems = [...links, newItem];
+            const id = links.filter((link) => link.id).length + 1;
+            if (links.some((link) => link.name === socialNetwork)) {
+                updatedItems = links.map((link) => {
+                    if (link.name === socialNetwork) {
+                        return {
+                            ...link,
+                            enabled: true,
+                            id,
+                        };
+                    } else {
+                        return link;
+                    }
+                });
+            } else {
+                const newItem = {
+                    ...selectedSocialNetwork,
+                    id,
+                };
+                updatedItems = [...links, newItem];
+            }
         } else {
             const indexToUpdate = links.findIndex(
                 (link) => link.name === socialNetwork
