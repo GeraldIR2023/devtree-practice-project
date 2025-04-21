@@ -1,5 +1,5 @@
 import { Toaster } from "sonner";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Links, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { SocialNetwork, User } from "../types";
 import { DndContext, DragEndEvent, closestCenter } from "@dnd-kit/core";
@@ -11,6 +11,7 @@ import {
 
 import DevTreeLink from "./DevTreeLink";
 import NavigationTabs from "./NavigationTabs";
+import { useQueryClient } from "@tanstack/react-query";
 
 type DevtreeProps = {
     data: User;
@@ -26,6 +27,7 @@ export default function Devtree({ data }: DevtreeProps) {
         );
     }, [data]);
 
+    const queryClient = useQueryClient();
     const handleDragEnd = (e: DragEndEvent) => {
         const { active, over } = e;
 
@@ -41,6 +43,19 @@ export default function Devtree({ data }: DevtreeProps) {
             const order = arrayMove(enabledLinks, prevIndex, newIndex); //^ Reordenamos el array de enlaces)
 
             setEnabledLinks(order); //^ Actualizamos el estado de los enlaces
+
+            const disabledLinks: SocialNetwork[] = JSON.parse(
+                data.links
+            ).filter((item: SocialNetwork) => !item.enabled);
+
+            const links = order.concat(disabledLinks); //^ Concatenamos los enlaces habilitados y deshabilitados
+
+            queryClient.setQueryData(["user"], (prevData: User) => {
+                return {
+                    ...prevData,
+                    links: JSON.stringify(links),
+                };
+            });
         }
     };
 
