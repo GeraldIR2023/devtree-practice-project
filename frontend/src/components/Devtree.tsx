@@ -26,8 +26,22 @@ export default function Devtree({ data }: DevtreeProps) {
         );
     }, [data]);
 
-    const handleDragEnd = () => {
-        //TODO
+    const handleDragEnd = (e: DragEndEvent) => {
+        const { active, over } = e;
+
+        if (over && over.id) {
+            const prevIndex = enabledLinks.findIndex(
+                (link) => link.id === active.id
+            ); //^ Obtenemos el índice del elemento que se está arrastrando
+
+            const newIndex = enabledLinks.findIndex(
+                (link) => link.id === over.id
+            ); //^ Obtenemos el índice del elemento sobre el que se está arrastrando
+
+            const order = arrayMove(enabledLinks, prevIndex, newIndex); //^ Reordenamos el array de enlaces)
+
+            setEnabledLinks(order); //^ Actualizamos el estado de los enlaces
+        }
     };
 
     return (
