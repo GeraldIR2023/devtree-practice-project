@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { LoginForm } from "../types";
@@ -8,6 +8,7 @@ import api from "../config/axios";
 import ErrorMessage from "../components/ErrorMessage";
 
 export default function LoginView() {
+    const navigate = useNavigate();
     const initialValues: LoginForm = {
         email: "",
         password: "",
@@ -23,10 +24,10 @@ export default function LoginView() {
         try {
             const { data } = await api.post(`/auth/login`, formData);
             localStorage.setItem("AUTH_TOKEN", data); //*Guardamos el token en el local storage
+            navigate("/admin");
         } catch (error) {
             if (isAxiosError(error) && error.response) {
                 toast.error(error.response.data.error);
-                console.log("AAAAAA");
             }
         }
     }; //^ Enviar datos al backend
