@@ -15,7 +15,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@headlessui/react": "^2.2.2",
     "@heroicons/react": "^2.2.0",
-    "@tailwindcss/vite": "^4.0.6",
+    "@tailwindcss/vite": "^4.1.4",
     "@tanstack/react-query": "^5.72.0",
     "@tanstack/react-query-devtools": "^5.72.0",
     "autoprefixer": "^10.4.20",
@@ -25,12 +25,12 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-router-dom": "^7.1.5",
-    "sonner": "^2.0.1",
-    "tailwindcss": "^3.4.17"
+    "sonner": "^2.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/postcss": "^4.1.4",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react-swc": "^3.5.0",
@@ -38,6 +38,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
+    "tailwindcss": "^4.1.4",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.22.0",
     "vite": "^6.1.0"
