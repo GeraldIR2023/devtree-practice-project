@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 import { isAxiosError } from "axios";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import type { RegisterForm } from "../types";
 
@@ -8,10 +8,12 @@ import api from "../config/axios";
 import ErrorMessage from "../components/ErrorMessage";
 
 export default function RegisterView() {
+    const location = useLocation();
+
     const initialValues: RegisterForm = {
         name: "",
         email: "",
-        handle: "",
+        handle: location.state.handle || "",
         password: "",
         password_confirmation: "",
     };
@@ -135,7 +137,7 @@ export default function RegisterView() {
                         Repetir Password
                     </label>
                     <input
-                        id="password"
+                        id="password_confirmation"
                         type="password"
                         placeholder="Repetir Password"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
