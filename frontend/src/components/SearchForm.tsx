@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import slugify from "react-slugify";
 import ErrorMessage from "./ErrorMessage";
 
 export default function SearchForm() {
@@ -15,7 +16,8 @@ export default function SearchForm() {
     const handle = watch("handle");
 
     const handleSearch = () => {
-        console.log(handle);
+        const slug = slugify(handle);
+        console.log(slug);
     };
     return (
         <form onSubmit={handleSubmit(handleSearch)} className="space-y-5">
